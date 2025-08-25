@@ -12,8 +12,7 @@ El proyecto se basa en el siguiente funcionamiento:
 
 ## Integrantes del Proyecto
 
-- **Edwin Arbey Valbuena Gamboa** - 20211005129
-- **Paula Andrea Chaparro Sánchez** – 20211005008
+- **Nicolas Moreno Ovalle - 20212005140
 - **Johan Sebastian Caceres Rodriguez** - 20212005111
 
 ## Requisitos
