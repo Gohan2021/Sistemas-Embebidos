@@ -1,76 +1,55 @@
-# Carro Seguidor de Línea con Raspberry Pi Pico W
+# Robot Recolector de Basura con Raspberry Pi Pico W
 
-Este proyecto implementa un carro seguidor de línea utilizando una Raspberry Pi Pico W y una cámara OV7670. El sistema captura imágenes, las procesa para detectar una línea en la pista y utiliza un algoritmo de ponderación en tres renglones para calcular el centro relativo de la línea, lo que permite ajustar la dirección del carro.
+Este proyecto implementa un **robot recolector de basura autónomo** utilizando una **Raspberry Pi Pico W** y una **cámara OV7670**. El sistema identifica objetos que simulan basura mediante procesamiento de imagen básica y se dirige hacia ellos para simular su recolección.
 
-## Descripción
+---
 
-El proyecto se basa en el siguiente funcionamiento:
-- **Captura de Imagen:** La cámara OV7670 captura una imagen en una resolución reducida (dividida por 16) y en formato YUV para facilitar el procesamiento.
-- **Procesamiento y Umbralización:** Se convierte la imagen a un formato binario aplicando un umbral de luminancia. Los píxeles con luminancia menor o igual a un valor predefinido se consideran negros y los que están por encima, blancos.
-- **Selección de Renglones y Ponderación:** Se seleccionan tres renglones específicos (fila central, una fila arriba y una fila abajo) para analizar la posición de la línea. Cada píxel en estas filas se pondera según su posición horizontal respecto al centro de la imagen. El algoritmo calcula un valor promedio que indica el desplazamiento de la línea.
-- **Control de Motores:** Con base en la posición detectada, el algoritmo ajusta la velocidad de los motores para corregir la dirección del carro, permitiendo que siga la línea de forma continua.
+##  Descripción
 
-## Integrantes del Proyecto
+El robot funciona de la siguiente manera:
 
-- **Nicolas Moreno Ovalle - 20212005140
-- **Johan Sebastian Caceres Rodriguez** - 20212005111
+- **Captura de Imagen:**  
+  La cámara OV7670 toma imágenes de baja resolución (formato YUV) para facilitar su análisis.
 
-## Requisitos
+-  **Detección de Basura:**  
+  El sistema analiza la imagen para detectar objetos con ciertas características (por ejemplo, colores brillantes o formas contrastantes) que simulan basura.
 
-- **Hardware:**
-  - Raspberry Pi Pico W
-  - Cámara OV7670
-  - LEDs y motores conectados a los pines GPIO según el diseño del circuito
-- **Software:**
-  - CircuitPython (o MicroPython) instalado en la Raspberry Pi Pico W
-  - Biblioteca `adafruit_ov7670` y otras dependencias (como `digitalio`, `busio`, `pwmio` y `board`)
+---
 
-## Instalación y Configuración
+##  Integrantes del Proyecto
 
-1. **Configurar la Raspberry Pi Pico W:**  
-   Instala CircuitPython en la placa siguiendo la documentación oficial.
+- **Nicolás Moreno Ovalle** - 20212005140  
+- **Johan Sebastián Cáceres Rodríguez** - 20212005111
 
-2. **Conectar el Hardware:**  
-   - Conecta la cámara OV7670 a los pines especificados en el código.
-   - Asegura que los LEDs y los motores estén correctamente conectados a los pines indicados.
+---
 
-3. **Instalar las Bibliotecas Necesarias:**  
-   Descarga e instala la biblioteca `adafruit_ov7670` y verifica que estén disponibles las dependencias requeridas.
+## Hardware
 
-4. **Cargar el Código:**  
-   Copia el script principal en la memoria de la Raspberry Pi Pico W.
+- Raspberry Pi Pico W  
+- Cámara OV7670  
+- Driver de motor y motores DC  
+- LEDs  
+- Brazo de madera
+
+### Software
+
+- MicroPython en la Raspberry Pi Pico W  
+- Bibliotecas:
+  - `adafruit_ov7670`  
+  - `digitalio`  
+  - `pwmio`  
+  - `board`
+
+---
 
 ## Uso
 
-1. **Alimentación:** Conecta la Raspberry Pi Pico W a una fuente de alimentación adecuada.
-2. **Ejecución:** Inicia el script. El sistema comenzará a capturar imágenes, procesarlas y ajustar los motores en función del algoritmo de ponderación.
-3. **Observación:** Podrás monitorear la salida a través del puerto serial, donde se mostrarán mensajes indicando la dirección (izquierda, derecha o derecho) según la posición detectada de la línea.
+1. Conecta la Raspberry Pi Pico W a una batería o fuente de energía.
+2. El robot comenzará a capturar imágenes automáticamente.
+3. Al detectar basura (según el color/luminancia predefinida), se moverá hacia ella.
+4. Una vez cerca, el robot puede:
+   - Detenerse.
+   - Recojer elemento o basura
+   - Encender un LED como indicación.
 
-## Estructura del Código
-
-El código se organiza en las siguientes secciones:
-
-- **Configuración de Hardware:**  
-  Inicialización de LEDs, motores y la cámara (con definición de pines y parámetros de configuración).
-
-- **Captura y Procesamiento de Imagen:**  
-  La cámara captura la imagen y se extraen tres renglones específicos para analizar la línea.
-
-- **Algoritmo de Ponderación:**  
-  Se realiza una suma ponderada de los píxeles de cada renglón para calcular el centro relativo de la línea. La fórmula es:
-  \[
-  \text{centro} = \frac{\sum (\text{peso} \times \text{valor del píxel})}{\sum (\text{valor del píxel})}
-  \]
-  donde el peso es la distancia del píxel al centro de la imagen.
-
-- **Control de Motores:**  
-  Dependiendo del valor promedio obtenido, se ajustan los motores para girar hacia la dirección correcta (izquierda o derecha) o para continuar en línea recta.
-
-## Contribución
-
-Este proyecto es fruto del trabajo colaborativo de los integrantes mencionados. Cada miembro aportó en diferentes áreas: diseño del algoritmo, implementación del hardware, programación del software y pruebas del sistema.
-
-
-## Contacto
-
-Para dudas, sugerencias o colaboraciones, por favor, contacta a alguno de los integrantes del equipo.
+---
