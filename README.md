@@ -29,7 +29,7 @@ El robot funciona de la siguiente manera:
 - Cámara OV7670  
 - Driver de motor y motores DC  
 - LEDs  
-- Brazo de madera
+- Brazo de acrilico
 
 ### Software
 
